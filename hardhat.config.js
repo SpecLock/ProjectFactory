@@ -1,10 +1,18 @@
+require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
+
 module.exports = {
-  solidity: "0.8.0",
+  solidity: "0.8.4",
   networks: {
-    hardhat: {},
-    // Add other networks here if needed
+    fuji: {
+      url: "https://api.avax-test.network/ext/bc/C/rpc",
+      chainId: 43113,
+      accounts: [process.env.PRIVATE_KEY]
+    }
   },
-  paths: {
-    artifacts: "./src/artifacts",
-  },
+  etherscan: {
+    apiKey: {
+      avalancheFujiTestnet: process.env.SNOWTRACE_API_KEY
+    }
+  }
 };
