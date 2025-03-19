@@ -1,0 +1,20 @@
+{
+  "name": "ProjectFactory",
+  "version": "1.0.0",
+  "description": "A Node.js application using Hardhat and AvalancheJS",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "hardhat test",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "@avalabs/avalanchejs": "^5.0.0"
+  },
+  "devDependencies": {
+    "hardhat": "^2.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^1.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
