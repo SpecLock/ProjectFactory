@@ -7,40 +7,41 @@ pragma solidity ^0.8.4;
  */
 contract Project {
     struct Milestone {
-        string title;           
-        uint256 tentativeDate;  
-        string description;     
-        uint256 amount;         
-        bool completed;         
+        string title;
+        uint256 tentativeDate;
+        string description;
+        uint256 amount;
+        bool completed;
     }
-    
-    address public owner;                       
-    string public projectName;                  
-    string public projectDescription;           
-    address payable public developerAddress;    
-    uint256 public totalCapital;                
-    Milestone[] public milestones;              
-    
+
+    address public owner;
+    string public projectName;
+    string public projectDescription;
+    address payable public developerAddress;
+    uint256 public totalCapital;
+    Milestone[] public milestones;
+
     event MilestoneAdded(uint256 indexed milestoneId, string title, uint256 amount);
     event MilestoneCompleted(uint256 indexed milestoneId, string proof);
     event MilestoneApproved(uint256 indexed milestoneId, uint256 amount);
-    
+
     modifier onlyOwner() {
         require(msg.sender == owner, "Solo el owner puede ejecutar esta funcion");
         _;
     }
-    
+
     constructor(
         string memory _projectName,
         string memory _projectDescription,
-        address payable _developerAddress
+        address payable _developerAddress,
+        address _owner
     ) {
-        owner = msg.sender;
+        owner = _owner;
         projectName = _projectName;
         projectDescription = _projectDescription;
         developerAddress = _developerAddress;
     }
-    
+
     function addMilestone(
         string memory _title,
         uint256 _tentativeDate,
@@ -56,20 +57,20 @@ contract Project {
         }));
         emit MilestoneAdded(milestones.length - 1, _title, _amount);
     }
-    
+
     function completeMilestone(uint256 _milestoneId, string memory _proof) public onlyOwner {
         require(_milestoneId < milestones.length, "Milestone no existe");
         milestones[_milestoneId].completed = true;
         emit MilestoneCompleted(_milestoneId, _proof);
     }
-    
+
     function approveMilestone(uint256 _milestoneId) public onlyOwner {
         require(_milestoneId < milestones.length, "Milestone no existe");
         require(milestones[_milestoneId].completed, "Milestone no esta completado");
         developerAddress.transfer(milestones[_milestoneId].amount);
         emit MilestoneApproved(_milestoneId, milestones[_milestoneId].amount);
     }
-    
+
     receive() external payable {
         totalCapital += msg.value;
     }
@@ -83,7 +84,12 @@ contract ProjectFactory {
         string memory _projectDescription,
         address payable _developerAddress
     ) public returns (address) {
-        Project newProject = new Project(_projectName, _projectDescription, _developerAddress);
+        Project newProject = new Project(
+            _projectName,
+            _projectDescription,
+            _developerAddress,
+            msg.sender
+        );
         projects.push(newProject);
         return address(newProject);
     }
