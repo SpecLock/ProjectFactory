@@ -87,5 +87,21 @@ contract ProjectFactory {
         projects.push(newProject);
     }
 
-  
+    function getProjectsByOwner(address _owner) public view returns (Project[] memory) {
+        uint count;
+        for (uint i = 0; i < projects.length; i++) {
+            if (projects[i].owner() == _owner) {
+                count++;
+            }
+        }
+        Project[] memory result = new Project[](count);
+        uint index;
+        for (uint j = 0; j < projects.length; j++) {
+            if (projects[j].owner() == _owner) {
+                result[index] = projects[j];
+                index++;
+            }
+        }
+        return result;
+    }
 }
