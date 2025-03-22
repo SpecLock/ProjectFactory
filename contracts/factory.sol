@@ -12,8 +12,9 @@ contract SimpleContract {
 contract Factory {
     SimpleContract[] public contracts;
 
-    function createContract() public {
+    function createContract() public returns (address) {
         SimpleContract newContract = new SimpleContract(msg.sender);
         contracts.push(newContract);
+        return address(newContract);
     }
 }
