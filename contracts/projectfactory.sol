@@ -82,9 +82,10 @@ contract ProjectFactory {
         string memory _projectName,
         string memory _projectDescription,
         address payable _developerAddress
-    ) public {
+    ) public returns (address) {
         Project newProject = new Project(_projectName, _projectDescription, _developerAddress);
         projects.push(newProject);
+        return address(newProject);
     }
 
     function getProjectsByOwner(address _owner) public view returns (Project[] memory) {
