@@ -1,0 +1,94 @@
+{
+  "name": "ProjectFactory",
+  "address": "0x433e3b673b4edf8d02a3b7a38600eba1cd6c22c7",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_projectName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_projectDescription",
+          "type": "string"
+        },
+        {
+          "internalType": "address payable",
+          "name": "_developerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "createProject",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_developer",
+          "type": "address"
+        }
+      ],
+      "name": "getProjectsByDeveloper",
+      "outputs": [
+        {
+          "internalType": "contract Project[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "getProjectsByOwner",
+      "outputs": [
+        {
+          "internalType": "contract Project[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "projects",
+      "outputs": [
+        {
+          "internalType": "contract Project",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "filePath": "ProjectFactory/contracts/projectfactory.sol",
+  "pinnedAt": 1742680042033
+}
