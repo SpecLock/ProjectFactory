@@ -104,4 +104,22 @@ contract ProjectFactory {
         }
         return result;
     }
+
+    function getProjectsByDeveloper(address _developer) public view returns (Project[] memory) {
+        uint count;
+        for (uint i = 0; i < projects.length; i++) {
+            if (projects[i].developerAddress() == _developer) {
+                count++;
+            }
+        }
+        Project[] memory result = new Project[](count);
+        uint index;
+        for (uint j = 0; j < projects.length; j++) {
+            if (projects[j].developerAddress() == _developer) {
+                result[index] = projects[j];
+                index++;
+            }
+        }
+        return result;
+    }
 }
